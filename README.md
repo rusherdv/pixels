@@ -1,5 +1,7 @@
 # Pixels
 
+Coded on Javascript
+
 A website, based on r/place of Reddit
 
 You can write what do you want on pixels!
