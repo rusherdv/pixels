@@ -53,29 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
           }
         }
     }
-      
-    function loadPixels() {
-      fetch('http://localhost:3000/api/pixels')
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.length === 0) {
-            // La base de datos está vacía, borrar todos los pixeles del pixelData
-            for (let i = 0; i < numRows; i++) {
-              for (let j = 0; j < numCols; j++) {
-                pixelData[i][j] = 'transparent';
-              }
-            }
-          } else {
-            // La base de datos no está vacía, cargar los pixeles desde el servidor
-            data.forEach((pixel) => {
-              pixelData[pixel.row][pixel.col] = pixel.color;
-            });
-          }
-          drawCanvas(); // Dibujar el canvas después de cargar los pixeles
-        })
-        .catch((error) => console.error('Error:', error));
-    }
-  
+
     function drawCanvas() {
       context.clearRect(0, 0, canvasWidth, canvasHeight);
       for (let i = 0; i < numRows; i++) {
@@ -101,10 +79,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const row = Math.floor(offsetY / pixelSize);
   
       pixelData[row][col] = currentColor;
-  
-      // Resto del código existente
       drawCanvas();
-      savePixels(); // Llamar a la función savePixels para guardar el pixel pintado
     }
       
     function handleMouseDown(e) {
@@ -208,6 +183,5 @@ document.addEventListener('DOMContentLoaded', function () {
     document.addEventListener('mousemove', handleMouseAtEdge);
   
     drawCanvas();
-    loadPixels();
 });
   
